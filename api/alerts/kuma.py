@@ -1,3 +1,4 @@
+from common.ip import is_valid_ip
 from services.uptime_kuma.model import AlertDataModel
 
 
@@ -16,9 +17,10 @@ class KumaAlerts:
         if monitor is None:
             return None
 
-        name = monitor['name']
-        if name is None:
+        description = monitor['description']
+        if description is None \
+                or not is_valid_ip(description):
             return None
 
         return AlertDataModel(message=message,
-                              node_name=name)
+                              ip=description)

@@ -8,7 +8,7 @@ class NodeModel(BaseModel):
 
 class AlertDataModel(BaseModel):
     message: str
-    node_name: str
+    ip: str
 
 
 class AlertData:
