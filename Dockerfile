@@ -25,4 +25,4 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 # Указывает команду, которая будет выполнена при запуске контейнера. 
 # В данном случае это будет запуск Python-скрипта main.py с помощью bash.
-CMD ["bash", "-c", "python run_bot.py"] 
+CMD ["bash", "-c", "python main.py"] 
