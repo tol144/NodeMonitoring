@@ -1,0 +1,8 @@
+pydantic-settings~=2.7.1
+uptime-kuma-api~=1.2.1
+ipaddress~=1.0.23
+pydantic~=2.10.6
+cloudflare~=4.0.0
+fastapi~=0.115.8
+paramiko~=3.5.1
+uvicorn~=0.34.0
