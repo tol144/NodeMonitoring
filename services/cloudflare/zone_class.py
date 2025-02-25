@@ -46,6 +46,25 @@ class ZoneClass(BaseCloudFlare):
                                   dns_record_id=dns.id,
                                   name=name)
 
+    def update_dns_ok(self,
+                      dns: DnsSearchResult):
+        name = dns.name
+        if name[0] == 'd':
+            name = name[1:]
+
+        dns_resource = self.get_dns_resources()
+        dns_resource.records.edit(zone_id=dns.zone_id,
+                                  dns_record_id=dns.id,
+                                  name=name)
+
+    def update_dns_fail(self,
+                        dns: DnsSearchResult):
+        name = f"d{dns.name}"
+        dns_resource = self.get_dns_resources()
+        dns_resource.records.edit(zone_id=dns.zone_id,
+                                  dns_record_id=dns.id,
+                                  name=name)
+
     @staticmethod
     def find_dns_zone_by_ip(zone_model_list: list[ZoneModel],
                             ip: str) -> DnsSearchResult | None:

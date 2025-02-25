@@ -3,7 +3,6 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-
     UVICORN_HOST: str
     UVICORN_PORT: int
 
@@ -21,9 +20,6 @@ class Settings(BaseSettings):
 
     RESTART_NODE_COMMAND: str
     STOP_NODE_COMMAND: str
-
-    OK_CLOUDFLARE_URL: str
-    FAIL_CLOUDFLARE_URL: str
 
     @property
     def uvicorn_host(self):
@@ -76,14 +72,6 @@ class Settings(BaseSettings):
     @property
     def stop_node_command(self):
         return self.STOP_NODE_COMMAND
-
-    @property
-    def ok_cloudflare_url(self):
-        return self.OK_CLOUDFLARE_URL
-
-    @property
-    def fail_cloudflare_url(self):
-        return self.FAIL_CLOUDFLARE_URL
 
     model_config = SettingsConfigDict(env_file=".env")
 

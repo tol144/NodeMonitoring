@@ -1,12 +1,11 @@
 import re
 
-from config import settings
 from api.alerts.kuma import KumaAlerts
 from services.node.methods import restart_node
 
 from services.uptime_kuma.model import AlertData
 
-from services.cloudflare.model import DnsSearchResult
+from services.cloudflare.model import DnsSearchResult, ZoneModel
 from services.cloudflare.zone_class import cloudflare_dns_zone
 
 
@@ -28,10 +27,13 @@ class APIMethods:
 
     @staticmethod
     def ok_alert(dns: DnsSearchResult):
-        cloudflare_dns_zone.update_dns(dns, settings.ok_cloudflare_url)
+        cloudflare_dns_zone.update_dns_ok(dns)
 
     @staticmethod
     def fail_alert(dns: DnsSearchResult):
-        cloudflare_dns_zone.update_dns(dns, settings.fail_cloudflare_url)
+        cloudflare_dns_zone.update_dns_fail(dns)
         restart_node(dns.ip)
 
+    @staticmethod
+    def get_all_dns() -> list[ZoneModel]:
+        return cloudflare_dns_zone.get_zone_model_list()
