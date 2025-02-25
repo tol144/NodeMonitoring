@@ -5,6 +5,7 @@ class DnsSearchResult(BaseModel):
     id: str
     ip: str
     zone_id: str
+    name: str
 
 
 class DnsZoneModel(BaseModel):
@@ -22,6 +23,7 @@ class ZoneModel(BaseModel):
             if dns.ip == ip:
                 return DnsSearchResult(id=dns.id,
                                        ip=ip,
-                                       zone_id=self.id)
+                                       zone_id=self.id,
+                                       name=dns.name)
 
         return None
