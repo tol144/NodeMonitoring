@@ -27,11 +27,12 @@ class APIMethods:
 
     @staticmethod
     def ok_alert(dns: DnsSearchResult):
-        cloudflare_dns_zone.update_dns_ok(dns)
+        # cloudflare_dns_zone.update_dns_ok(dns)
+        pass
 
     @staticmethod
     def fail_alert(dns: DnsSearchResult):
-        cloudflare_dns_zone.update_dns_fail(dns)
+        # cloudflare_dns_zone.update_dns_fail(dns)
         restart_node(dns.ip)
 
     @staticmethod
