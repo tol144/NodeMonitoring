@@ -8,9 +8,12 @@ from services.uptime_kuma.model import AlertData
 from services.cloudflare.model import DnsSearchResult, ZoneModel
 from services.cloudflare.zone_class import cloudflare_dns_zone
 
+from loguru import logger
+
 
 class APIMethods:
     @staticmethod
+    @logger.catch
     def process_alert(alert_data: dict):
         alert_data_model = KumaAlerts.process_alert(alert_data)
         if alert_data_model is None:
