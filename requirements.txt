@@ -8,3 +8,5 @@ paramiko~=3.5.1
 uvicorn~=0.34.0
 loguru~=0.7.3
 redis~=6.0.0
+APScheduler~=3.11.0
+pytz~=2025.2
