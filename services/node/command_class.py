@@ -13,5 +13,8 @@ class NodeCommandClass:
     def restart(self):
         self.ssh.run_command(settings.restart_node_command)
 
+    def reboot(self):
+        self.ssh.run_command(settings.restart_node_command)
+
     def stop(self):
         self.ssh.run_command(settings.stop_node_command)
