@@ -6,6 +6,9 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from api.router import api_router
 
+from services.cloudflare.zone_class import cloudflare_dns_zone
+from services.sheduler.sheduler import Scheduler
+
 from config import settings
 
 
@@ -27,7 +30,8 @@ app = create_fastapi_app()
 
 
 async def main():
-    pass
+    await cloudflare_dns_zone.cache_dns_zone_model_list()
+    await Scheduler.start()
 
 
 if __name__ == "__main__":

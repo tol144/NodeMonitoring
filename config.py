@@ -18,8 +18,17 @@ class Settings(BaseSettings):
     SSH_USERNAME: str
     SSH_KEY_PATH: str
 
+    REDIS_HOST: str
+    REDIS_PORT: str
+
     RESTART_NODE_COMMAND: str
+    REBOOT_NODE_COMMAND: str
     STOP_NODE_COMMAND: str
+
+    @property
+    def redis_config(self):
+        return {"host": self.REDIS_HOST,
+                "port": self.REDIS_PORT}
 
     @property
     def uvicorn_host(self):
@@ -68,6 +77,10 @@ class Settings(BaseSettings):
     @property
     def restart_node_command(self):
         return self.RESTART_NODE_COMMAND
+
+    @property
+    def reboot_node_command(self):
+        return self.REBOOT_NODE_COMMAND
 
     @property
     def stop_node_command(self):

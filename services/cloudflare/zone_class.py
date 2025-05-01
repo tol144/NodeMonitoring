@@ -2,6 +2,7 @@ from services.cloudflare.cloudflare import BaseCloudFlare
 
 from common.ip import is_valid_ip
 from services.cloudflare.model import DnsZoneModel, ZoneModel, DnsSearchResult
+from services.cloudflare.state import DnsZoneState
 
 
 class ZoneClass(BaseCloudFlare):
@@ -78,6 +79,15 @@ class ZoneClass(BaseCloudFlare):
     def get_dns_zone_by_ip(self, ip: str) -> DnsSearchResult | None:
         zone_model_list = self.get_zone_model_list()
         return self.find_dns_zone_by_ip(zone_model_list, ip)
+
+    async def cache_dns_zone_model_list(self):
+        zone_model_list = self.get_zone_model_list()
+        await DnsZoneState.set_dns_zones(zone_model_list)
+
+    @staticmethod
+    async def get_cached_dns_zone_by_ip(ip: str) -> DnsSearchResult | None:
+        zone_model_list = await DnsZoneState.get_dns_zones()
+        return ZoneClass.find_dns_zone_by_ip(zone_model_list, ip)
 
 
 cloudflare_dns_zone = ZoneClass()
