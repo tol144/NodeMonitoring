@@ -60,7 +60,11 @@ class ZoneClass(BaseCloudFlare):
 
     def update_dns_fail(self,
                         dns: DnsSearchResult):
-        name = f"d{dns.name}"
+        name = dns.name
+        if name[0] == 'd':
+            return
+
+        name = f"d{name}"
         dns_resource = self.get_dns_resources()
         dns_resource.records.edit(zone_id=dns.zone_id,
                                   dns_record_id=dns.id,
