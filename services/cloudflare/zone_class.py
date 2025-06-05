@@ -47,8 +47,8 @@ class ZoneClass(BaseCloudFlare):
                                   dns_record_id=dns.id,
                                   name=name)
 
-    def update_dns_ok(self,
-                      dns: DnsSearchResult):
+    def update_dns_turn_on(self,
+                           dns: DnsSearchResult):
         name = dns.name
         if name[0] == 'd':
             name = name[1:]
@@ -58,8 +58,8 @@ class ZoneClass(BaseCloudFlare):
                                   dns_record_id=dns.id,
                                   name=name)
 
-    def update_dns_fail(self,
-                        dns: DnsSearchResult):
+    def update_dns_turn_off(self,
+                            dns: DnsSearchResult):
         name = dns.name
         if name[0] == 'd':
             return

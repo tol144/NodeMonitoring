@@ -25,9 +25,9 @@ class APIMethods:
             return
 
         if re.search(AlertData.ok, alert_data_model.message, re.IGNORECASE):
-            await APIMethods.ok_alert(dns)
+            await APIMethods.turn_on_node(dns)
         elif re.search(AlertData.fail, alert_data_model.message, re.IGNORECASE):
-            await APIMethods.fail_alert(dns)
+            await APIMethods.restart_node(dns)
 
     @staticmethod
     async def get_dns_zone(ip: str) -> DnsSearchResult | None:
@@ -39,13 +39,17 @@ class APIMethods:
         return await ZoneClass.get_cached_dns_zone_by_ip(ip)
 
     @staticmethod
-    async def ok_alert(dns: DnsSearchResult):
-        cloudflare_dns_zone.update_dns_ok(dns)
+    async def turn_on_node(dns: DnsSearchResult):
+        cloudflare_dns_zone.update_dns_turn_on(dns)
         await ServersState.remove(dns.ip)
 
     @staticmethod
-    async def fail_alert(dns: DnsSearchResult):
-        cloudflare_dns_zone.update_dns_fail(dns)
+    async def turn_off_node(dns: DnsSearchResult):
+        cloudflare_dns_zone.update_dns_turn_off(dns)
+
+    @staticmethod
+    async def restart_node(dns: DnsSearchResult):
+        await APIMethods.turn_off_node(dns)
         await ServersState.add(dns.ip)
         restart_node(dns.ip)
 
