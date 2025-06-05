@@ -20,7 +20,7 @@ class APIMethods:
         if alert_data_model is None:
             return
 
-        dns = await ZoneClass.get_cached_dns_zone_by_ip(alert_data_model.ip)
+        dns = await APIMethods.get_dns_zone(alert_data_model.ip)
         if dns is None:
             return
 
@@ -28,6 +28,15 @@ class APIMethods:
             await APIMethods.ok_alert(dns)
         elif re.search(AlertData.fail, alert_data_model.message, re.IGNORECASE):
             await APIMethods.fail_alert(dns)
+
+    @staticmethod
+    async def get_dns_zone(ip: str) -> DnsSearchResult | None:
+        dns = await ZoneClass.get_cached_dns_zone_by_ip(ip)
+        if dns is not None:
+            return dns
+
+        await cloudflare_dns_zone.cache_dns_zone_model_list()
+        return await ZoneClass.get_cached_dns_zone_by_ip(ip)
 
     @staticmethod
     async def ok_alert(dns: DnsSearchResult):
