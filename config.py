@@ -6,10 +6,10 @@ class Settings(BaseSettings):
     UVICORN_HOST: str
     UVICORN_PORT: int
 
-    UPTIME_KUMA_URL: str
-    UPTIME_KUMA_USERNAME: str
-    UPTIME_KUMA_PASSWORD: str
-    UPTIME_KUMA_API_KEY: str
+    # UPTIME_KUMA_URL: str
+    # UPTIME_KUMA_USERNAME: str
+    # UPTIME_KUMA_PASSWORD: str
+    # UPTIME_KUMA_API_KEY: str
 
     CLOUDFLARE_EMAIL: str
     CLOUDFLARE_API_KEY: str
@@ -38,21 +38,21 @@ class Settings(BaseSettings):
     def uvicorn_port(self):
         return self.UVICORN_PORT
 
-    @property
-    def uptime_kuma_url(self):
-        return self.UPTIME_KUMA_URL
-
-    @property
-    def uptime_kuma_username(self):
-        return self.UPTIME_KUMA_USERNAME
-
-    @property
-    def uptime_kuma_password(self):
-        return self.UPTIME_KUMA_PASSWORD
-
-    @property
-    def uptime_kuma_api_key(self):
-        return self.UPTIME_KUMA_API_KEY
+    # @property
+    # def uptime_kuma_url(self):
+    #     return self.UPTIME_KUMA_URL
+    #
+    # @property
+    # def uptime_kuma_username(self):
+    #     return self.UPTIME_KUMA_USERNAME
+    #
+    # @property
+    # def uptime_kuma_password(self):
+    #     return self.UPTIME_KUMA_PASSWORD
+    #
+    # @property
+    # def uptime_kuma_api_key(self):
+    #     return self.UPTIME_KUMA_API_KEY
 
     @property
     def cloudflare_email(self):
